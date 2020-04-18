@@ -1,3 +1,25 @@
+//calculate shortest Path in N-Ary Tree.
+//Sample input
+
+// 13            - Total number of edges
+// A B 5
+// B E 11
+// B F 5
+// F N 3
+// F M 1
+// N O 1
+// A C 10
+// C G 10
+// A D 3
+// D H 12
+// D J 7
+// J L 5
+// J K 3
+// A           - Root Node 
+
+//Output
+//11         - Shortest Path from Root to a Leaf node.
+
 import java.util.*;
 import java.io.*;
 public class NArray {
@@ -19,14 +41,6 @@ public class NArray {
         	weightList.add(weight);
         } 
    } 
-    
-    
-    
-    
-    
-    
-    
-    
     public static void main(String[] args) throws IOException   
     { 
     	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
