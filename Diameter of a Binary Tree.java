@@ -92,7 +92,7 @@ class GfG {
         while (t > 0) {
             String s = br.readLine();
             Node root = buildTree(s);
-            Tree g = new Tree();
+            Solution g = new Solution();
             System.out.println(g.diameter(root));
             t--;
         }
@@ -103,26 +103,23 @@ class GfG {
 
 // User function Template for Java
 
-class Tree {
-    /* Complete the function to get diameter of a binary tree */
-    int ans = 0;
+class Solution 
+{
+    //Function to return the diameter of a Binary Tree.
+    int diameter = 0;
     int diameter(Node root) {
-        ans = 0;
-        getDiameter(root);
-        return ans;
+        diameter = 0; 
+        calculateDiameter (root);
+        return diameter;
     }
     
-    int getDiameter (Node root) {
+    int calculateDiameter (Node root) {
         if (root == null)
-            return 0;
+            return -1;
+        int left = calculateDiameter (root.left) + 1;
+        int right = calculateDiameter (root.right) + 1;
+        diameter = Math.max (diameter, left+right+1);
         
-        int left = getDiameter (root.left);
-        int right = getDiameter (root.right);
-        
-        int num = left + right + 1;
-        ans = Math.max(ans, num);
-        
-        int max = Math.max(left, right);
-        return max+1;
+        return Math.max(left, right);
     }
 }
