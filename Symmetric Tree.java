@@ -132,19 +132,20 @@ class GfG
     // return true/false denoting whether the tree is Symmetric or not
     public static boolean isSymmetric(Node root)
     {
-        if (root == null)
+        if (root == null || (root.right == null && root.left == null))
             return true;
-        return isEqual (root.left, root.right);
+        
+        return isSymetric (root.left, root.right);
     }
     
-    public static boolean isEqual (Node root1, Node root2) {
+    public static boolean isSymetric (Node root1, Node root2) {
         if (root1 == null && root2 == null)
             return true;
+        if ((root1 != null && root2 == null) || (root2 != null && root1 == null) || (root1.data != root2.data))
+            return false;
         
-        if (root1 != null && root2 != null) {
-            return ((root1.data == root2.data) && (isEqual(root1.left, root2.right)) && (isEqual(root1.right, root2.left)));
-        }
-        
-        return false;
+        return (isSymetric(root1.left, root2.right) && isSymetric(root1.right, root2.left));
     }
+    
+    
 }
