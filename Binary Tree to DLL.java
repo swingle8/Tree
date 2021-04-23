@@ -114,7 +114,7 @@ class BT_To_DLL
 	        while(t > 0){
 	            String s = br.readLine();
     	    	Node root = buildTree(s);
-        	    GfG g = new GfG();
+        	    Solution g = new Solution();
 			    
 			    Node ans = g.bToDLL(root);
 			    printList(ans);
@@ -146,29 +146,29 @@ class Node
 
 //This function should return head to the DLL
 
-class GfG
+class Solution
 {
-    Node prev = null;
-    Node head = null;
+    //Function to convert binary tree to doubly linked list and return it.
+    Node parent;
+    Node ans;
     Node bToDLL(Node root) {
-        prev = null;
-        head = null;
-        getLinkedList(root);
-        return head;
-    }
-    
-    void getLinkedList (Node root) {
-        if (root == null)
-            return;
-            
-        getLinkedList (root.left);
-        if (prev == null)
-            head = root;
-        else {
-            root.left = prev;
-            prev.right = root;
+	    if (root == null)
+	        return root;
+	    bToDLL (root.left);
+	    
+	    if (parent == null)
+	        parent = root;
+	    else {
+	        parent.right = root;
+	        root.left = parent;
+	        parent = root;
         }
-        prev = root;
-        getLinkedList (root.right);
-    }
+        
+        if (ans == null)
+	        ans = root;
+        
+	    bToDLL (root.right);
+	    return ans;
+	}
+    
 }
