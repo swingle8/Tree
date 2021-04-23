@@ -118,36 +118,28 @@ class GFG {
 class Tree
 {
     int ans = Integer.MIN_VALUE;
-    int maxPathSum(Node root) { 
-        if (root == null)
-            return 0;
-        
-        maxSumPath (root);
+    int maxPathSum(Node root)
+    { 
+        traverse (root);
         return ans;
     } 
     
-    int maxSumPath (Node root) {
+    int traverse (Node root) {
         if (root == null)
             return 0;
-        int left = maxSumPath (root.left);
-        int right = maxSumPath (root.right);
-        
-        if (root.left == null && root.right == null) {
+        if (root.left == null && root.right == null)
             return root.data;
+           
+        int left = traverse (root.left);
+        int right = traverse (root.right);
+        
+        if (root.left == null || root.right == null) {
+            return root.left == null ? (right+root.data) : (left+root.data);
         }
-        else if (root.left == null && root.right != null) {
-            return root.data + right;
-        }
-        else if (root.left != null && root.right == null) {
-            return root.data + left;
-        }
-        else if (root.left != null && root.right != null) {
-            int sum = root.data + left + right;
-            ans = Math.max(ans, sum);
-            
-            int num = Math.max(left, right);
-            return root.data + num; 
-        }
-        return 0;
+        
+        int sum = root.data + left + right;
+        ans = Math.max(ans, sum);
+        
+        return Math.max(root.data+left, root.data+right);
     }
 }
